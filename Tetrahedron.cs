@@ -9,6 +9,8 @@ public class Tetrahedron : MonoBehaviour {
 	public bool sharedVertices = false;
 	public float size = 1f;
 	
+	private const float SQRT3 = 1.7320508f;
+	
 	public void Rebuild(){
 		MeshFilter meshFilter = GetComponent<MeshFilter>();
 		if (meshFilter==null){
@@ -16,10 +18,12 @@ public class Tetrahedron : MonoBehaviour {
 			return;
 		}
 		
+		float L = SQRT3/2f * size;
+		
 		Vector3 p0 = new Vector3(0,0,0);
 		Vector3 p1 = new Vector3(size,0,0);
-		Vector3 p2 = new Vector3(0.5f*size,0,Mathf.Sqrt(0.75f)*size);
-		Vector3 p3 = new Vector3(0.5f*size,Mathf.Sqrt(0.75f)*size,Mathf.Sqrt(0.75f)*size/3);
+		Vector3 p2 = new Vector3(size/2f,0,L);
+		Vector3 p3 = new Vector3(size/2f,L,L/3f);
 		
 		Mesh mesh = meshFilter.sharedMesh;
 		if (mesh == null){
